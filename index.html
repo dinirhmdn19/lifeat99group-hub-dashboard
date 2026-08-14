@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lifeat99Group Hub</title>
+  <style>
+    :root { --ink:#18222d; --muted:#75808f; --line:#e7eaf0; --paper:#f7f8fa; --white:#fff; --blue:#2764d8; --blue-soft:#eaf1ff; --orange:#f29132; --green:#16805b; --red:#bd4050; --shadow:0 14px 36px rgba(25,35,55,.08); }
+    *{box-sizing:border-box} body{margin:0;background:var(--paper);font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)} button,input,select,textarea{font:inherit} button{cursor:pointer}
+    .app{min-height:100vh;display:grid;grid-template-columns:238px 1fr}.sidebar{background:#111a2a;color:#dce5f2;padding:25px 16px;position:sticky;top:0;height:100vh}.brand{display:flex;gap:10px;align-items:center;padding:0 10px 31px;color:white;font-size:18px;font-weight:750;letter-spacing:-.4px}.mark{display:grid;place-items:center;background:#4b83ef;color:#fff;width:30px;height:30px;border-radius:9px;font-size:13px}.navlabel{color:#8390a6;font-size:10px;font-weight:800;letter-spacing:1.2px;margin:0 10px 11px}.nav{display:grid;gap:4px}.nav button{border:0;border-radius:8px;background:none;color:#b7c2d3;padding:11px 12px;text-align:left;font-weight:650}.nav button:hover,.nav button.active{background:#24324a;color:#fff}.nav button .n{opacity:.7;float:right;font-size:12px}.sidefoot{position:absolute;bottom:24px;left:26px;font-size:12px;color:#8c9aaf}.main{padding:26px 34px 48px;max-width:1600px;width:100%;margin:auto}.topbar{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:29px}.eyebrow{color:var(--blue);font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:800}.title{font-size:29px;letter-spacing:-1px;margin:3px 0 0}.profile{display:flex;gap:10px;align-items:center;color:#566273;font-weight:650}.avatar{background:#f7cdaa;color:#8d4e1c;border-radius:50%;height:33px;width:33px;display:grid;place-items:center;font-size:12px}.view{display:none}.view.active{display:block}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}.filters{display:flex;gap:8px;flex-wrap:wrap}.select{border:1px solid var(--line);background:white;border-radius:8px;padding:9px 11px;color:#5a6676;font-weight:600}.primary{border:0;background:var(--blue);color:#fff;border-radius:8px;padding:10px 14px;font-weight:750;box-shadow:0 4px 12px rgba(39,100,216,.2)}.secondary{border:1px solid var(--line);background:#fff;color:#344154;border-radius:8px;padding:9px 12px;font-weight:700}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px}.stat,.panel{background:var(--white);border:1px solid var(--line);border-radius:12px;box-shadow:0 2px 7px rgba(26,41,66,.025)}.stat{padding:17px}.stat .label{font-size:12px;color:var(--muted);font-weight:650}.stat .num{font-size:25px;font-weight:790;margin-top:5px;letter-spacing:-.5px}.stat .delta{color:var(--green);font-size:11px;font-weight:700}.calendar{padding:18px}.calendarhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.calendarhead strong{font-size:17px}.calgrid{display:grid;grid-template-columns:repeat(7,1fr);border:1px solid var(--line);border-radius:9px;overflow:hidden}.dow{background:#fbfcfe;color:#7c8795;text-align:center;padding:8px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.6px}.day{min-height:106px;border-top:1px solid var(--line);border-right:1px solid var(--line);padding:8px;color:#7a8594;font-weight:700}.day:nth-child(7n){border-right:0}.day.empty{background:#fcfcfd}.date{font-size:11px}.card{margin-top:7px;border-left:3px solid var(--orange);background:#fff5e9;color:#6a461a;border-radius:4px;padding:6px;font-size:10px;line-height:1.25;font-weight:750;cursor:pointer}.card:hover{filter:brightness(.97)}.card .tiny{display:block;color:#967654;font-size:9px;margin-top:3px}.tablewrap{overflow:auto}.table{width:100%;border-collapse:collapse;text-align:left;white-space:nowrap}.table th{color:#8993a0;font-size:10px;text-transform:uppercase;letter-spacing:.55px;background:#fbfcfe;padding:12px 14px}.table td{border-top:1px solid var(--line);padding:13px 14px;color:#4d5969}.table tr{cursor:pointer}.table tr:hover td{background:#fbfdff}.contentname{font-weight:750;color:#253245}.sub{font-size:11px;color:#8993a0;margin-top:2px}.badge{font-size:11px;font-weight:800;border-radius:999px;padding:4px 8px;display:inline-block}.draft{background:#eef1f5;color:#647182}.planned{background:#eaf1ff;color:#2764d8}.pending{background:#fff2dc;color:#a65d10}.approved{background:#e4f6ef;color:#0e7a55}.rejected{background:#ffe9eb;color:#b33b49}.split{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,.8fr);gap:20px}.panelhead{display:flex;justify-content:space-between;align-items:center;padding:17px 18px;border-bottom:1px solid var(--line)}.panelhead h3{margin:0;font-size:15px}.panelbody{padding:16px 18px}.queue{display:grid;gap:11px}.submission{border:1px solid var(--line);border-radius:9px;padding:13px;cursor:pointer}.submission:hover{border-color:#b8cdf8}.submissionrow{display:flex;justify-content:space-between;gap:8px}.mini{font-size:11px;color:var(--muted);margin-top:4px}.metric{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)}.metric:last-child{border:0}.metric b{font-size:15px}.formbox{max-width:760px;margin:0 auto;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);border-radius:14px;padding:27px}.formbox h2{margin:3px 0 8px;font-size:25px;letter-spacing:-.7px}.formintro{color:var(--muted);margin:0 0 24px}.sectiontitle{font-weight:800;font-size:13px;margin:25px 0 12px;padding-top:20px;border-top:1px solid var(--line)}.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:grid;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:12px;font-weight:750;color:#566273}.field input,.field select,.field textarea{border:1px solid #dce1e9;border-radius:7px;padding:10px 11px;outline:0;background:#fff}.field textarea{min-height:92px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-soft)}.formnote{font-size:12px;color:var(--muted);margin:15px 0}.success{display:none;background:#e6f7ef;color:#146543;padding:11px 13px;border-radius:8px;font-weight:700;margin-top:15px}.detail{max-width:920px;margin:auto}.detailback{border:0;background:none;color:var(--blue);font-weight:750;padding:0;margin-bottom:14px}.detailcard{background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);border-radius:14px;overflow:hidden}.detailhero{padding:25px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:20px}.detailhero h2{margin:2px 0;font-size:25px;letter-spacing:-.6px}.detailgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:22px 25px}.detailgrid label{font-size:10px;color:#8993a0;font-weight:850;text-transform:uppercase;letter-spacing:.7px;display:block;margin-bottom:4px}.detailgrid p{margin:0;font-weight:650;color:#3c4857}.desc{grid-column:1/-1;padding:0 25px 23px;color:#536071}.actions{border-top:1px solid var(--line);padding:17px 25px;display:flex;gap:10px}.approve{background:var(--green)}.reject{border-color:#efc7cc;color:var(--red)}.reviewnote{width:100%;border:1px solid var(--line);border-radius:8px;padding:10px;margin:0 25px 4px;width:calc(100% - 50px)}.emptymsg{padding:28px;text-align:center;color:var(--muted)}@media(max-width:900px){.app{grid-template-columns:1fr}.sidebar{position:static;height:auto;padding:16px}.sidefoot{display:none}.brand{padding-bottom:12px}.nav{grid-template-columns:repeat(4,1fr)}.nav button{font-size:12px;padding:8px}.main{padding:22px 16px}.grid{grid-template-columns:1fr 1fr}.split{grid-template-columns:1fr}.day{min-height:82px}.fields,.detailgrid{grid-template-columns:1fr}.topbar{align-items:flex-start}.profile{display:none}}@media(max-width:540px){.grid{grid-template-columns:1fr}.toolbar{align-items:flex-start;flex-direction:column}.calgrid{font-size:10px}.day{min-height:70px;padding:5px}.card{font-size:8px;padding:4px}.nav{overflow:auto;display:flex}.nav button{white-space:nowrap}.title{font-size:24px}}
+    .choicegroup{display:flex;flex-wrap:wrap;gap:8px}.choicegroup label{border:1px solid #dce1e9;border-radius:999px;padding:8px 11px;color:#566273;font-size:13px;font-weight:700;cursor:pointer}.choicegroup input{accent-color:var(--blue);margin:0 6px 0 0;vertical-align:middle}.choicegroup label:has(input:checked){border-color:#90b2f8;background:var(--blue-soft);color:#1f56bd}.calendarnotice{display:none;background:#e6f7ef;color:#146543;border-radius:8px;padding:10px 12px;font-weight:700;font-size:12px;margin-bottom:13px}
+    .remove-content{border:0;background:none;color:var(--red);font-weight:750;padding:4px 0}.remove-content:hover{text-decoration:underline}.status-control{border:1px solid #d8e3f8;background:#f4f7ff;color:#2764d8;border-radius:999px;padding:5px 22px 5px 9px;font-size:11px;font-weight:800;max-width:132px}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar"><div class="brand"><span class="mark">99</span> Lifeat99Group Hub</div><div class="navlabel">WORKSPACE</div><nav class="nav">
+    <button class="active" data-view="calendar">📅&nbsp; Calendar</button><button data-view="plan">📝&nbsp; Content Plan <span class="n">1</span></button><button data-view="settings">⚙️&nbsp; Settings</button>
+  </nav><div class="sidefoot">People Team · 99 Group</div></aside>
+  <main class="main">
+    <header class="topbar"><div><div class="eyebrow">Employer Branding</div><h1 class="title" id="pageTitle">Content Calendar</h1></div><div class="profile"><span>People Team</span><span class="avatar">PT</span></div></header>
+    <section class="view active" id="calendar"><div class="toolbar"><div class="filters"><button class="secondary">‹</button><button class="secondary">August 2026</button><button class="secondary">›</button><select class="select"><option>All platforms</option><option>Instagram</option><option>LinkedIn</option></select><select class="select"><option>All status</option><option>Draft</option><option>Planned</option></select></div><button class="primary" onclick="openContentForm()">+ Add content</button></div><div class="grid"><div class="stat"><div class="label">Planned this month</div><div class="num">1</div><div class="delta">On track</div></div><div class="stat"><div class="label">Upcoming deadlines</div><div class="num">1</div><div class="delta">19 Aug</div></div><div class="stat"><div class="label">Pending submissions</div><div class="num">2</div><div class="delta">Needs review</div></div><div class="stat"><div class="label">Published this month</div><div class="num">0</div><div class="delta">Add when live</div></div></div><div class="panel calendar"><div class="calendarhead"><strong>August 2026</strong><span class="mini">Monthly view</span></div><div class="calgrid"><div class="dow">Mon</div><div class="dow">Tue</div><div class="dow">Wed</div><div class="dow">Thu</div><div class="dow">Fri</div><div class="dow">Sat</div><div class="dow">Sun</div>
+      <div class="day empty"></div><div class="day empty"></div><div class="day empty"></div><div class="day empty"></div><div class="day empty"></div><div class="day"><span class="date">1</span></div><div class="day"><span class="date">2</span></div><div class="day"><span class="date">3</span></div><div class="day"><span class="date">4</span></div><div class="day"><span class="date">5</span></div><div class="day"><span class="date">6</span></div><div class="day"><span class="date">7</span></div><div class="day"><span class="date">8</span></div><div class="day"><span class="date">9</span></div><div class="day"><span class="date">10</span></div><div class="day"><span class="date">11</span></div><div class="day"><span class="date">12</span></div><div class="day"><span class="date">13</span></div><div class="day"><span class="date">14</span></div><div class="day"><span class="date">15</span></div><div class="day"><span class="date">16</span></div><div class="day"><span class="date">17</span></div><div class="day"><span class="date">18</span></div><div class="day"><span class="date">19</span><div class="card" onclick="openContent()">Recap 17-an <span class="tiny">IG Feeds · Agung</span></div></div><div class="day"><span class="date">20</span></div><div class="day"><span class="date">21</span></div><div class="day"><span class="date">22</span></div><div class="day"><span class="date">23</span></div><div class="day"><span class="date">24</span></div><div class="day"><span class="date">25</span></div><div class="day"><span class="date">26</span></div><div class="day"><span class="date">27</span></div><div class="day"><span class="date">28</span></div><div class="day"><span class="date">29</span></div><div class="day"><span class="date">30</span></div><div class="day"><span class="date">31</span></div><div class="day empty"></div><div class="day empty"></div><div class="day empty"></div><div class="day empty"></div><div class="day empty"></div><div class="day empty"></div></div></div></section>
+    <section class="view" id="plan"><div class="toolbar"><div class="filters"><select class="select"><option>All categories</option><option>99TeamStories</option></select><select class="select"><option>All platforms</option><option>IG Feeds</option></select><select class="select"><option>All PICs</option><option>Agung</option></select></div><button class="primary" onclick="openContentForm()">+ Add content</button></div><div class="panel tablewrap"><table class="table"><thead><tr><th>Content</th><th>Publish date</th><th>Platform</th><th>PIC</th><th>Status</th><th></th></tr></thead><tbody><tr onclick="openContent()"><td><div class="contentname">Recap 17-an</div><div class="sub">99TeamStories · 9:16</div></td><td>19 Aug 2026</td><td>IG Feeds</td><td>Agung</td><td><span class="badge planned">Planned</span></td><td>›</td></tr></tbody></table></div></section>
+    <section class="view" id="submissions"><div class="toolbar"><div class="filters"><button class="secondary">All submissions</button><button class="secondary">Pending · 2</button></div><button class="primary" onclick="showView('submit')">Open employee form ↗</button></div><div class="split"><div class="panel"><div class="panelhead"><h3>Waiting for review</h3><span class="badge pending">2 pending</span></div><div class="panelbody queue"><div class="submission" onclick="openSubmission('sarah')"><div class="submissionrow"><b>Sarah — “My First Month at 99 Group”</b><span class="badge pending">Pending</span></div><div class="mini">Employee Story · Instagram · Submitted 14 Aug</div></div><div class="submission" onclick="openSubmission('bima')"><div class="submissionrow"><b>Bima — “A day with the Data team”</b><span class="badge pending">Pending</span></div><div class="mini">Culture & Team · LinkedIn · Submitted 12 Aug</div></div></div></div><div class="panel"><div class="panelhead"><h3>Review principle</h3></div><div class="panelbody"><p style="margin-top:0;color:#536071">Employee ideas stay separate from the Content Plan until the People Team approves them.</p><div style="font-weight:800;color:#2764d8;line-height:1.9">Submission<br>↓<br>People Team review<br>↓<br>Approved → Content Plan</div></div></div></div></section>
+    <section class="view" id="insights"><div class="toolbar"><div class="filters"><button class="secondary">August 2026</button><select class="select"><option>All content</option></select></div><button class="primary" onclick="alert('In the live version, this opens the Add Insight form and keeps a dated history.')">+ Add insight</button></div><div class="split"><div class="panel"><div class="panelhead"><h3>Performance history</h3><span class="mini">Manual entries are never overwritten</span></div><div class="emptymsg">No published content yet.<br><span class="mini">Once content is published, add a dated insight every 3 days.</span></div></div><div class="panel"><div class="panelhead"><h3>Example metrics</h3></div><div class="panelbody"><div class="metric"><span>Reach</span><b>12,430</b></div><div class="metric"><span>Impressions</span><b>15,820</b></div><div class="metric"><span>Engagement rate</span><b>8.4%</b></div></div></div></div></section>
+    <section class="view" id="submit"><div class="formbox"><div class="eyebrow">99 Group Employee Content Submission</div><h2>Share your story with us</h2><p class="formintro">Your idea will be reviewed by the People Team before it is added to the Content Plan.</p><form onsubmit="submitIdea(event)"><div class="sectiontitle">Employee information</div><div class="fields"><div class="field"><label>Name</label><input required placeholder="Your full name"></div><div class="field"><label>Work email</label><input type="email" required placeholder="name@99.co"></div><div class="field"><label>Department / team</label><input required placeholder="e.g. People Team"></div><div class="field"><label>Role <span style="font-weight:500;color:#9aa4b1">(optional)</span></label><input placeholder="e.g. Talent Partner"></div></div><div class="sectiontitle">Your content idea</div><div class="fields"><div class="field full"><label>Content title / idea</label><input required placeholder="e.g. My First Month at 99 Group"></div><div class="field"><label>Category</label><select><option>Employee Story</option><option>Culture & Team</option><option>Behind the scenes</option><option>Achievement</option></select></div><div class="field"><label>Suggested platform</label><select><option>Instagram</option><option>LinkedIn</option><option>TikTok</option></select></div><div class="field full"><label>What would you like to share?</label><textarea required placeholder="Tell us what the story is about and why it could be useful or inspiring."></textarea></div><div class="field full"><label>Google Drive / Canva link <span style="font-weight:500;color:#9aa4b1">(optional)</span></label><input placeholder="https://"></div><div class="field full"><label>Additional notes <span style="font-weight:500;color:#9aa4b1">(optional)</span></label><textarea placeholder="Anything else the People Team should know?"></textarea></div></div><p class="formnote">By submitting, you give the People Team permission to review and contact you about this idea.</p><button class="primary" type="submit">Submit for review</button><div class="success" id="success">Thanks — your submission has been sent to the People Team review queue.</div></form></div></section>
+    <section class="view" id="contentDetail"><div class="detail"><button class="detailback" onclick="showView('plan')">← Back to Content Plan</button><article class="detailcard"><div class="detailhero"><div><div class="eyebrow">Content plan</div><h2>Recap 17-an</h2><span class="badge planned">Planned</span></div><button class="secondary" onclick="openContentForm(true)">Edit content</button></div><div class="detailgrid"><div><label>Deadline</label><p>19 Aug 2026</p></div><div><label>PIC</label><p>Agung</p></div><div><label>Platform</label><p>IG Feeds</p></div><div><label>Category</label><p>99TeamStories</p></div><div><label>Ratio</label><p>9:16</p></div><div><label>Reference</label><p>Link to reference</p></div><div class="desc"><label>Objective</label><p>To recap the office's 17-an Independence Day celebration, capturing activities and memorable moments that highlight unity and independence.</p></div></div></article></div></section>
+    <section class="view" id="contentForm"><div class="formbox"><div class="eyebrow">Content Plan</div><h2 id="contentFormHeading">Add content</h2><form onsubmit="saveContent(event)"><div class="fields"><div class="field full"><label>Content name</label><input id="contentName" required placeholder="e.g. OhYay!@99 Recap"></div><div class="field"><label>Category</label><select id="contentCategory"><option value="99TeamStories">99TeamStories</option><option value="99Hiring">99Hiring</option><option value="99Spotlight">99Spotlight</option><option value="99Greetings">99Greetings</option></select></div><div class="field"><label>Objective</label><input id="contentObjective" placeholder="What should this content achieve?"></div><div class="field"><label>Platform</label><div class="choicegroup" id="contentPlatform"><label><input type="checkbox" value="Instagram">Instagram</label><label><input type="checkbox" value="LinkedIn">LinkedIn</label><label><input type="checkbox" value="TikTok">TikTok</label></div></div><div class="field"><label>Format</label><select id="contentFormat"><option value="Static">Static</option><option value="Motion">Motion</option><option value="Video">Video</option></select></div><div class="field"><label>Ratio</label><input id="contentRatio" placeholder="e.g. 9:16"></div><div class="field"><label>Publish date</label><input id="contentDate" type="date" required></div><div class="field"><label>Deadline</label><input id="contentDeadline" type="date"></div><div class="field"><label>PIC</label><input id="contentPic" placeholder="Person in charge"></div><div class="field"><label>Status</label><select id="contentStatus"><option value="draft">Draft</option><option value="planned">Planned</option><option value="script-making">Script Making</option><option value="recording">Recording</option><option value="editing">Editing</option><option value="revisions">Revisions</option><option value="on-review">On Review</option><option value="approved">Approved</option><option value="posted">Posted</option><option value="not-approved">Not Approved</option><option value="reschedule">Reschedule</option></select></div><div class="field full"><label>Reference URL</label><input id="contentReference" type="url" placeholder="https://"></div>
+<div class="field full"><label>Script</label><textarea id="contentScript" placeholder="Add the content script or talking points."></textarea></div>
+<div class="field full"><label>Caption</label><textarea id="contentCaption" placeholder="Add the social media caption."></textarea></div>
+<div class="field full"><label>Materials URL</label><input id="contentMaterials" type="url" placeholder="Google Drive, Canva, or other materials link"></div></div><div style="display:flex;gap:10px;margin-top:20px"><button class="primary" type="submit">Save content</button><button class="secondary" type="button" onclick="showView('plan')">Cancel</button></div><div class="success" id="contentSaved">Content saved in this prototype session.</div></form></div></section>
+    <section class="view" id="submissionDetail"><div class="detail"><button class="detailback" onclick="showView('submissions')">← Back to Submissions</button><article class="detailcard"><div class="detailhero"><div><div class="eyebrow">Employee content submission</div><h2 id="subTitle">My First Month at 99 Group</h2><span class="badge pending">Pending review</span></div></div><div class="detailgrid"><div><label>Employee</label><p id="subEmployee">Sarah</p></div><div><label>Department</label><p>Customer Experience</p></div><div><label>Suggested platform</label><p id="subPlatform">Instagram</p></div><div><label>Category</label><p id="subCategory">Employee Story</p></div><div><label>Submitted</label><p>14 Aug 2026</p></div><div><label>Materials</label><p style="color:#2764d8">View Drive link ↗</p></div><div class="desc"><label>Description</label><p id="subDescription">A personal story about joining 99 Group, the colleagues who made the first month memorable, and what surprised me about the culture.</p></div></div><textarea class="reviewnote" placeholder="Optional internal review note"></textarea><div class="actions"><button class="primary approve" onclick="review('approved')">Approve & create draft</button><button class="secondary reject" onclick="review('rejected')">Reject submission</button></div></article></div></section>
+  
+<section class="view" id="settings">
+  <div class="formbox">
+    <div class="eyebrow">Workspace Settings</div>
+    <h2>Settings</h2>
+    <p class="formintro">Phase 1 settings are stored on this browser. SSO, user permissions, email notifications and Google Calendar integration will be connected later.</p>
+
+    <div class="sectiontitle">Calendar preferences</div>
+    <div class="fields">
+      <div class="field">
+        <label>Default reminder</label>
+        <select id="settingReminder">
+          <option value="0">No reminder</option>
+          <option value="15">15 minutes before</option>
+          <option value="30">30 minutes before</option>
+          <option value="60">1 hour before</option>
+          <option value="1440">1 day before</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Default content status</label>
+        <select id="settingStatus">
+          <option value="draft">Draft</option>
+          <option value="planned">Planned</option>
+          <option value="script-making">Script Making</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="sectiontitle">Future integrations</div>
+    <div class="fields">
+      <div class="field full">
+        <label>Google Calendar</label>
+        <div style="padding:11px 12px;border:1px solid #e7eaf0;border-radius:8px;background:#fbfcfe;color:#75808f">
+          Not connected yet. We will only enable calendar sync after authentication and permissions are set up.
+        </div>
+      </div>
+      <div class="field full">
+        <label>SSO & user permissions</label>
+        <div style="padding:11px 12px;border:1px solid #e7eaf0;border-radius:8px;background:#fbfcfe;color:#75808f">
+          Planned for a later phase. Admins will eventually control menu access, email notifications and calendar inclusion per user.
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button class="primary" type="button" onclick="saveSettings()">Save settings</button>
+    </div>
+    <div class="success" id="settingsSaved">Settings saved on this browser.</div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/*
+ Lifeat99Group Hub — Phase 1
+ Focus: Content Plan + Calendar + Settings.
+ Intentionally NOT enabled yet: SSO, employee submissions, insights, email, Google Calendar.
+*/
+
+// Supabase client configuration.
+// The publishable key is intended for browser/client-side use.
+// Do NOT replace it with a secret/service-role key.
+const SUPABASE_URL = 'https://trlkbgghfddjdttmarlp.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_nBMuo_vfrn9t4Vg9v9epXQ_A_6pejzw';
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
+
+const titles = {
+  calendar: 'Content Calendar',
+  plan: 'Content Plan',
+  settings: 'Settings',
+  contentDetail: 'Content details',
+  contentForm: 'Content Plan'
+};
+
+const statusOptions = [
+  ['draft','Draft'], ['planned','Planned'], ['script-making','Script Making'],
+  ['recording','Recording'], ['editing','Editing'], ['revisions','Revisions'],
+  ['on-review','On Review'], ['approved','Approved'], ['posted','Posted'],
+  ['not-approved','Not Approved'], ['reschedule','Reschedule']
+];
+
+let content = [];
+let editingContentId = null;
+let currentMonth = new Date(2026, 7, 1);
+
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  const target = document.getElementById(id);
+  if (target) target.classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b =>
+    b.classList.toggle('active', b.dataset.view === id)
+  );
+  document.getElementById('pageTitle').textContent = titles[id] || 'Content Hub';
+  if (id === 'settings') loadSettings();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+document.querySelectorAll('.nav button').forEach(b =>
+  b.addEventListener('click', () => showView(b.dataset.view))
+);
+
+function formatDate(date) {
+  if (!date) return '—';
+  return new Date(date + 'T00:00:00')
+    .toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'});
+}
+
+function statusLabel(value) {
+  return statusOptions.find(([v]) => v === value)?.[1] || value || 'Draft';
+}
+
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, ch =>
+    ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[ch])
+  );
+}
+
+function setConnectionNotice(message) {
+  document.getElementById('connectionNotice')?.remove();
+  if (!message) return;
+
+  const notice = document.createElement('div');
+  notice.id = 'connectionNotice';
+  notice.className = 'calendarnotice';
+  notice.style.display = 'block';
+  notice.style.background = '#fff2dc';
+  notice.style.color = '#8a5a10';
+  notice.textContent = message;
+  document.querySelector('#calendar .toolbar')?.after(notice);
+}
+
+async function loadContent() {
+  const {data, error} = await supabaseClient
+    .from('content')
+    .select('*')
+    .order('publish_date', {ascending:true});
+
+  if (error) {
+    console.error(error);
+    setConnectionNotice(
+      'Supabase is connected, but the content table request was blocked. Check the content table RLS policies.'
+    );
+    alert('Supabase connection reached the database, but loading content failed: ' + error.message);
+    return;
+  }
+
+  setConnectionNotice('');
+  content = data || [];
+  renderAll();
+}
+
+function renderPlan() {
+  const body = document.querySelector('#plan tbody');
+  body.textContent = '';
+
+  if (!content.length) {
+    body.innerHTML = '<tr><td colspan="6" class="emptymsg">No content yet. Click + Add content to create your first item.</td></tr>';
+    return;
+  }
+
+  content.forEach(item => {
+    const row = document.createElement('tr');
+    row.dataset.contentId = item.id;
+
+    const info = document.createElement('td');
+    info.innerHTML = `<div class="contentname">${escapeHtml(item.content_name)}</div>
+      <div class="sub">${escapeHtml(item.category || '')} · ${escapeHtml(item.content_format || '')}</div>`;
+    row.append(info);
+
+    [formatDate(item.publish_date), item.platform || 'No platform selected', item.pic || 'Unassigned']
+      .forEach(value => {
+        const cell = document.createElement('td');
+        cell.textContent = value;
+        row.append(cell);
+      });
+
+    const statusCell = document.createElement('td');
+    const select = document.createElement('select');
+    select.className = 'status-control';
+
+    statusOptions.forEach(([value,label]) => {
+      const option = document.createElement('option');
+      option.value = value;
+      option.textContent = label;
+      select.append(option);
+    });
+
+    select.value = item.status || 'draft';
+    select.addEventListener('click', e => e.stopPropagation());
+    select.addEventListener('change', async e => {
+      e.stopPropagation();
+      await updateStatus(item.id, e.target.value);
+    });
+
+    statusCell.append(select);
+    row.append(statusCell);
+
+    const action = document.createElement('td');
+    const remove = document.createElement('button');
+    remove.className = 'remove-content';
+    remove.textContent = 'Remove';
+    remove.onclick = async event => {
+      event.stopPropagation();
+      await removeContent(item.id);
+    };
+    action.append(remove);
+    row.append(action);
+
+    row.onclick = () => openDetail(item.id);
+    body.append(row);
+  });
+}
+
+async function updateStatus(id, status) {
+  if (!supabaseClient) {
+    alert('Supabase is not connected yet.');
+    return;
+  }
+
+  const {error} = await supabaseClient
+    .from('content')
+    .update({status, updated_at:new Date().toISOString()})
+    .eq('id', id);
+
+  if (error) {
+    alert('Could not update status: ' + error.message);
+    return;
+  }
+
+  const item = content.find(x => x.id === id);
+  if (item) item.status = status;
+  renderAll();
+}
+
+async function removeContent(id) {
+  if (!confirm('Remove this content from the Content Plan?')) return;
+
+  if (supabaseClient) {
+    const {error} = await supabaseClient.from('content').delete().eq('id', id);
+    if (error) {
+      alert('Could not remove content: ' + error.message);
+      return;
+    }
+  } else {
+    alert('Supabase is not connected yet, so the preview item cannot be permanently removed.');
+    return;
+  }
+
+  content = content.filter(item => item.id !== id);
+  renderAll();
+  showView('plan');
+}
+
+function renderCalendar() {
+  // SINGLE SOURCE OF TRUTH:
+  // Every content record with a publish_date appears on that date,
+  // regardless of status. Records without a publish_date are omitted.
+  const grid = document.querySelector('#calendar .calgrid');
+  const heading = document.querySelector('#calendar .calendarhead strong');
+  if (!grid) return;
+
+  heading.textContent = currentMonth.toLocaleDateString('en-US', {
+    month:'long', year:'numeric'
+  });
+
+  grid.querySelectorAll('.day').forEach(x => x.remove());
+
+  const year = currentMonth.getFullYear();
+  const month = currentMonth.getMonth();
+  const firstDay = (new Date(year, month, 1).getDay() + 6) % 7;
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  for (let i=0; i<firstDay; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'day empty';
+    grid.append(cell);
+  }
+
+  for (let day=1; day<=daysInMonth; day++) {
+    const cell = document.createElement('div');
+    cell.className = 'day';
+    cell.innerHTML = `<span class="date">${day}</span>`;
+
+    const dateKey = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+
+    // Calendar visibility is determined ONLY by publish_date.
+    // Status must never hide an item from the calendar.
+    content
+      .filter(item => Boolean(item.publish_date) && item.publish_date === dateKey)
+      .sort((a, b) => String(a.content_name || '').localeCompare(String(b.content_name || '')))
+      .forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.dataset.status = item.status || 'draft';
+        card.innerHTML = `${escapeHtml(item.content_name)}
+          <span class="tiny">${escapeHtml(item.platform || '')} · ${escapeHtml(item.pic || '')}</span>`;
+        card.onclick = () => openDetail(item.id);
+        cell.append(card);
+      });
+
+    grid.append(cell);
+  }
+
+  const total = firstDay + daysInMonth;
+  for (let i=total; i<42; i++) {
+    const cell = document.createElement('div');
+    cell.className = 'day empty';
+    grid.append(cell);
+  }
+
+  updateStats();
+}
+
+function updateStats() {
+  const year = currentMonth.getFullYear();
+  const month = currentMonth.getMonth();
+
+  const monthly = content.filter(item => {
+    if (!item.publish_date) return false;
+    const d = new Date(item.publish_date + 'T00:00:00');
+    return d.getFullYear() === year && d.getMonth() === month;
+  });
+
+  const posted = monthly.filter(x => x.status === 'posted').length;
+  const upcoming = monthly.filter(x => x.deadline && x.status !== 'posted').length;
+
+  const nums = document.querySelectorAll('#calendar .stat .num');
+  if (nums[0]) nums[0].textContent = monthly.length;
+  if (nums[1]) nums[1].textContent = upcoming;
+  if (nums[2]) nums[2].textContent = '—';
+  if (nums[3]) nums[3].textContent = posted;
+}
+
+function renderAll() {
+  renderPlan();
+  renderCalendar();
+}
+
+function openDetail(id) {
+  const item = content.find(x => x.id === id);
+  if (!item) return;
+
+  const detail = document.querySelector('#contentDetail .detail');
+
+  detail.innerHTML = `
+    <button class="detailback" onclick="showView('plan')">← Back to Content Plan</button>
+    <article class="detailcard">
+      <div class="detailhero">
+        <div>
+          <div class="eyebrow">Content plan</div>
+          <h2>${escapeHtml(item.content_name)}</h2>
+          <span class="badge planned">${escapeHtml(statusLabel(item.status))}</span>
+        </div>
+        <button class="secondary" onclick="openForm('${item.id}')">Edit content</button>
+      </div>
+      <div class="detailgrid">
+        <div><label>Deadline</label><p>${formatDate(item.deadline)}</p></div>
+        <div><label>PIC</label><p>${escapeHtml(item.pic || 'Unassigned')}</p></div>
+        <div><label>Platform</label><p>${escapeHtml(item.platform || '—')}</p></div>
+        <div><label>Category</label><p>${escapeHtml(item.category || '—')}</p></div>
+        <div><label>Format</label><p>${escapeHtml(item.content_format || '—')}</p></div>
+        <div><label>Ratio</label><p>${escapeHtml(item.ratio || '—')}</p></div>
+        <div><label>Publish date</label><p>${formatDate(item.publish_date)}</p></div>
+        <div><label>Reference</label><p>${item.reference_url ? `<a href="${escapeHtml(item.reference_url)}" target="_blank" rel="noopener">Open ↗</a>` : '—'}</p></div>
+        <div class="desc"><label>Objective</label><p>${escapeHtml(item.objective || '—')}</p></div>
+        <div class="desc"><label>Script / Writing</label><p>${escapeHtml(item.script || '—')}</p></div>
+        <div class="desc"><label>Caption</label><p>${escapeHtml(item.caption || '—')}</p></div>
+        <div class="desc"><label>Materials</label><p>${item.materials_url ? `<a href="${escapeHtml(item.materials_url)}" target="_blank" rel="noopener">Open materials ↗</a>` : '—'}</p></div>
+      </div>
+    </article>`;
+
+  showView('contentDetail');
+}
+
+function openForm(id=null) {
+  editingContentId = id;
+
+  const form = document.querySelector('#contentForm form');
+  form.reset();
+
+  document.getElementById('contentFormHeading').textContent = id ? 'Edit content' : 'Add content';
+
+  const item = id ? content.find(x => x.id === id) : null;
+
+  if (item) {
+    document.getElementById('contentName').value = item.content_name || '';
+    document.getElementById('contentCategory').value = item.category || '99TeamStories';
+    document.getElementById('contentObjective').value = item.objective || '';
+    document.getElementById('contentFormat').value = item.content_format || 'Static';
+    document.getElementById('contentRatio').value = item.ratio || '';
+    document.getElementById('contentDate').value = item.publish_date || '';
+    document.getElementById('contentDeadline').value = item.deadline || '';
+    document.getElementById('contentPic').value = item.pic || '';
+    document.getElementById('contentStatus').value = item.status || 'draft';
+    document.getElementById('contentReference').value = item.reference_url || '';
+    document.getElementById('contentScript').value = item.script || '';
+    document.getElementById('contentCaption').value = item.caption || '';
+    document.getElementById('contentMaterials').value = item.materials_url || '';
+
+    document.querySelectorAll('#contentPlatform input').forEach(input => {
+      input.checked = (item.platform || '')
+        .split(',')
+        .map(x => x.trim())
+        .includes(input.value);
+    });
+  } else {
+    document.getElementById('contentStatus').value =
+      localStorage.getItem('lifeHubDefaultStatus') || 'draft';
+  }
+
+  showView('contentForm');
+}
+
+async function saveContent(event) {
+  event.preventDefault();
+
+  if (!supabaseClient) {
+    alert('Supabase is not connected yet. We will connect it in the next step.');
+    return;
+  }
+
+  const record = {
+    content_name: document.getElementById('contentName').value.trim(),
+    category: document.getElementById('contentCategory').value,
+    objective: document.getElementById('contentObjective').value.trim(),
+    platform: [...document.querySelectorAll('#contentPlatform input:checked')]
+      .map(x => x.value).join(', '),
+    content_format: document.getElementById('contentFormat').value,
+    ratio: document.getElementById('contentRatio').value.trim(),
+    publish_date: document.getElementById('contentDate').value,
+    status: document.getElementById('contentStatus').value,
+    reference_url: document.getElementById('contentReference').value.trim(),
+    script: document.getElementById('contentScript').value.trim(),
+    caption: document.getElementById('contentCaption').value.trim(),
+    materials_url: document.getElementById('contentMaterials').value.trim(),
+    updated_at: new Date().toISOString()
+  };
+
+  let result;
+
+  if (editingContentId) {
+    result = await supabaseClient
+      .from('content')
+      .update(record)
+      .eq('id', editingContentId)
+      .select()
+      .single();
+  } else {
+    result = await supabaseClient
+      .from('content')
+      .insert(record)
+      .select()
+      .single();
+  }
+
+  if (result.error) {
+    alert('Could not save content: ' + result.error.message);
+    return;
+  }
+
+  await loadContent();
+  editingContentId = null;
+  openDetail(result.data.id);
+}
+
+function loadSettings() {
+  document.getElementById('settingReminder').value =
+    localStorage.getItem('lifeHubReminder') || '60';
+  document.getElementById('settingStatus').value =
+    localStorage.getItem('lifeHubDefaultStatus') || 'draft';
+}
+
+function saveSettings() {
+  localStorage.setItem('lifeHubReminder', document.getElementById('settingReminder').value);
+  localStorage.setItem('lifeHubDefaultStatus', document.getElementById('settingStatus').value);
+
+  document.getElementById('settingsSaved').style.display = 'block';
+  setTimeout(() => document.getElementById('settingsSaved').style.display = 'none', 2500);
+}
+
+
+/* Replace the hard-coded calendar month buttons with functional navigation. */
+const calendarFilters = document.querySelector('#calendar .filters');
+if (calendarFilters) {
+  calendarFilters.textContent = '';
+
+  const prev = document.createElement('button');
+  prev.className = 'secondary';
+  prev.textContent = '‹';
+  prev.onclick = () => {
+    currentMonth.setMonth(currentMonth.getMonth() - 1);
+    renderCalendar();
+  };
+
+  const next = document.createElement('button');
+  next.className = 'secondary';
+  next.textContent = '›';
+  next.onclick = () => {
+    currentMonth.setMonth(currentMonth.getMonth() + 1);
+    renderCalendar();
+  };
+
+  const monthBtn = document.createElement('button');
+  monthBtn.className = 'secondary';
+  monthBtn.textContent = 'Current month';
+  monthBtn.onclick = () => {
+    currentMonth = new Date(2026, 7, 1);
+    renderCalendar();
+  };
+
+  calendarFilters.append(prev, monthBtn, next);
+}
+
+/* Point every existing Add Content button to the single real form. */
+document.querySelectorAll('button').forEach(btn => {
+  if (btn.textContent.includes('+ Add content')) btn.onclick = () => openForm();
+});
+
+document.querySelector('#contentForm form').onsubmit = saveContent;
+
+window.showView = showView;
+window.openContentForm = () => openForm();
+window.openContent = () => content[0] && openDetail(content[0].id);
+window.openForm = openForm;
+window.saveSettings = saveSettings;
+
+showView('calendar');
+loadContent();
+</script>
+</body></html>
