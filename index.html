@@ -677,6 +677,13 @@ showView('calendar');
     if (error) { setConnectionNotice('Supabase content could not be loaded. Check the content table RLS policies.'); console.error(error); return; }
     content = data || []; setConnectionNotice(''); Hub.renderAll();
   };
+  Hub.upsertContent = record => {
+    const index = content.findIndex(item => item.id === record.id);
+    if (index === -1) content.push(record);
+    else content[index] = record;
+    content.sort((a, b) => String(a.publish_date || '').localeCompare(String(b.publish_date || '')));
+    Hub.renderAll();
+  };
   Hub.updateStatus = async (id, select, previousStatus) => {
     const status = select.value;
     select.disabled = true;
@@ -718,7 +725,8 @@ showView('calendar');
     if (!record.content_name) return; const id = Hub.activeModalId;
     const result = id ? await supabaseClient.from('content').update(record).eq('id', id).select().single() : await supabaseClient.from('content').insert(record).select().single();
     if (result.error) { alert(`Could not save content: ${result.error.message}`); return; }
-    await Hub.load(); Hub.openDetail(result.data.id);
+    Hub.upsertContent(result.data);
+    Hub.openDetail(result.data.id);
   };
   Hub.insights = [];
   Hub.renderInsights = () => {
