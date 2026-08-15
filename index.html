@@ -23,7 +23,7 @@
       <div class="day empty"></div><div class="day empty"></div><div class="day empty"></div><div class="day empty"></div><div class="day empty"></div><div class="day"><span class="date">1</span></div><div class="day"><span class="date">2</span></div><div class="day"><span class="date">3</span></div><div class="day"><span class="date">4</span></div><div class="day"><span class="date">5</span></div><div class="day"><span class="date">6</span></div><div class="day"><span class="date">7</span></div><div class="day"><span class="date">8</span></div><div class="day"><span class="date">9</span></div><div class="day"><span class="date">10</span></div><div class="day"><span class="date">11</span></div><div class="day"><span class="date">12</span></div><div class="day"><span class="date">13</span></div><div class="day"><span class="date">14</span></div><div class="day"><span class="date">15</span></div><div class="day"><span class="date">16</span></div><div class="day"><span class="date">17</span></div><div class="day"><span class="date">18</span></div><div class="day"><span class="date">19</span><div class="card" onclick="openContent()">Recap 17-an <span class="tiny">IG Feeds · Agung</span></div></div><div class="day"><span class="date">20</span></div><div class="day"><span class="date">21</span></div><div class="day"><span class="date">22</span></div><div class="day"><span class="date">23</span></div><div class="day"><span class="date">24</span></div><div class="day"><span class="date">25</span></div><div class="day"><span class="date">26</span></div><div class="day"><span class="date">27</span></div><div class="day"><span class="date">28</span></div><div class="day"><span class="date">29</span></div><div class="day"><span class="date">30</span></div><div class="day"><span class="date">31</span></div><div class="day empty"></div><div class="day empty"></div><div class="day empty"></div><div class="day empty"></div><div class="day empty"></div><div class="day empty"></div></div></div></section>
     <section class="view" id="plan"><div class="toolbar"><div class="filters"><span class="mini" id="planTotalLabel">0 total content</span></div><button class="primary" onclick="openContentForm()">+ Add content</button></div><div class="panel tablewrap"><table class="table"><thead><tr><th>Content</th><th>Publish date</th><th>Deadline</th><th>Platform</th><th>PIC</th><th>Status</th><th></th></tr></thead><tbody></tbody></table></div></section>
     <section class="view" id="submissions"><div class="toolbar"><div class="filters"><button class="secondary">All submissions</button><button class="secondary">Pending · 2</button></div><button class="primary" onclick="showView('submit')">Open employee form ↗</button></div><div class="split"><div class="panel"><div class="panelhead"><h3>Waiting for review</h3><span class="badge pending">2 pending</span></div><div class="panelbody queue"><div class="submission" onclick="openSubmission('sarah')"><div class="submissionrow"><b>Sarah — “My First Month at 99 Group”</b><span class="badge pending">Pending</span></div><div class="mini">Employee Story · Instagram · Submitted 14 Aug</div></div><div class="submission" onclick="openSubmission('bima')"><div class="submissionrow"><b>Bima — “A day with the Data team”</b><span class="badge pending">Pending</span></div><div class="mini">Culture & Team · LinkedIn · Submitted 12 Aug</div></div></div></div><div class="panel"><div class="panelhead"><h3>Review principle</h3></div><div class="panelbody"><p style="margin-top:0;color:#536071">Employee ideas stay separate from the Content Plan until the People Team approves them.</p><div style="font-weight:800;color:#2764d8;line-height:1.9">Submission<br>↓<br>People Team review<br>↓<br>Approved → Content Plan</div></div></div></div></section>
-    <section class="view" id="insights"><div class="toolbar"><div class="filters"><button class="secondary">August 2026</button><select class="select"><option>All content</option></select></div><button class="primary" onclick="alert('In the live version, this opens the Add Insight form and keeps a dated history.')">+ Add insight</button></div><div class="split"><div class="panel"><div class="panelhead"><h3>Performance history</h3><span class="mini">Manual entries are never overwritten</span></div><div class="emptymsg">No published content yet.<br><span class="mini">Once content is published, add a dated insight every 3 days.</span></div></div><div class="panel"><div class="panelhead"><h3>Example metrics</h3></div><div class="panelbody"><div class="metric"><span>Reach</span><b>12,430</b></div><div class="metric"><span>Impressions</span><b>15,820</b></div><div class="metric"><span>Engagement rate</span><b>8.4%</b></div></div></div></div></section>
+    <section class="view" id="insights"><div class="toolbar"><div class="filters"><span class="mini">Manual entries are preserved as dated history.</span></div><button class="primary" type="button" id="addInsight">+ Add insight</button></div><div class="panel tablewrap"><table class="table"><thead><tr><th>Content</th><th>Recorded</th><th>Reach</th><th>Likes</th><th>Comments</th><th>Shares</th><th>Saves</th><th>Engagement rate</th><th>Notes</th></tr></thead><tbody id="insightsHistory"><tr><td colspan="9" class="emptymsg">Loading insight history…</td></tr></tbody></table></div></section>
     <section class="view" id="submit"><div class="formbox"><div class="eyebrow">99 Group Employee Content Submission</div><h2>Share your story with us</h2><p class="formintro">Your idea will be reviewed by the People Team before it is added to the Content Plan.</p><form onsubmit="submitIdea(event)"><div class="sectiontitle">Employee information</div><div class="fields"><div class="field"><label>Name</label><input required placeholder="Your full name"></div><div class="field"><label>Work email</label><input type="email" required placeholder="name@99.co"></div><div class="field"><label>Department / team</label><input required placeholder="e.g. People Team"></div><div class="field"><label>Role <span style="font-weight:500;color:#9aa4b1">(optional)</span></label><input placeholder="e.g. Talent Partner"></div></div><div class="sectiontitle">Your content idea</div><div class="fields"><div class="field full"><label>Content title / idea</label><input required placeholder="e.g. My First Month at 99 Group"></div><div class="field"><label>Category</label><select><option>Employee Story</option><option>Culture & Team</option><option>Behind the scenes</option><option>Achievement</option></select></div><div class="field"><label>Suggested platform</label><select><option>Instagram</option><option>LinkedIn</option><option>TikTok</option></select></div><div class="field full"><label>What would you like to share?</label><textarea required placeholder="Tell us what the story is about and why it could be useful or inspiring."></textarea></div><div class="field full"><label>Google Drive / Canva link <span style="font-weight:500;color:#9aa4b1">(optional)</span></label><input placeholder="https://"></div><div class="field full"><label>Additional notes <span style="font-weight:500;color:#9aa4b1">(optional)</span></label><textarea placeholder="Anything else the People Team should know?"></textarea></div></div><p class="formnote">By submitting, you give the People Team permission to review and contact you about this idea.</p><button class="primary" type="submit">Submit for review</button><div class="success" id="success">Thanks — your submission has been sent to the People Team review queue.</div></form></div></section>
     <section class="view" id="contentDetail"><div class="detail"><button class="detailback" onclick="showView('plan')">← Back to Content Plan</button><article class="detailcard"><div class="detailhero"><div><div class="eyebrow">Content plan</div><h2>Recap 17-an</h2><span class="badge planned">Planned</span></div><button class="secondary" onclick="openContentForm(true)">Edit content</button></div><div class="detailgrid"><div><label>Deadline</label><p>19 Aug 2026</p></div><div><label>PIC</label><p>Agung</p></div><div><label>Platform</label><p>IG Feeds</p></div><div><label>Category</label><p>99TeamStories</p></div><div><label>Ratio</label><p>9:16</p></div><div><label>Reference</label><p>Link to reference</p></div><div class="desc"><label>Objective</label><p>To recap the office's 17-an Independence Day celebration, capturing activities and memorable moments that highlight unity and independence.</p></div></div></article></div></section>
     <section class="view" id="contentForm"><div class="formbox"><div class="eyebrow">Content Plan</div><h2 id="contentFormHeading">Add content</h2><form onsubmit="saveContent(event)"><div class="fields"><div class="field full"><label>Content name</label><input id="contentName" required placeholder="e.g. OhYay!@99 Recap"></div><div class="field"><label>Category</label><select id="contentCategory"><option value="99TeamStories">99TeamStories</option><option value="99Hiring">99Hiring</option><option value="99Spotlight">99Spotlight</option><option value="99Greetings">99Greetings</option></select></div><div class="field"><label>Objective</label><input id="contentObjective" placeholder="What should this content achieve?"></div><div class="field"><label>Platform</label><div class="choicegroup" id="contentPlatform"><label><input type="checkbox" value="Instagram">Instagram</label><label><input type="checkbox" value="LinkedIn">LinkedIn</label><label><input type="checkbox" value="TikTok">TikTok</label></div></div><div class="field"><label>Format</label><select id="contentFormat"><option value="Static">Static</option><option value="Motion">Motion</option><option value="Video">Video</option></select></div><div class="field"><label>Ratio</label><input id="contentRatio" placeholder="e.g. 9:16"></div><div class="field"><label>Publish date</label><input id="contentDate" type="date" required></div><div class="field"><label>Deadline</label><input id="contentDeadline" type="date"></div><div class="field"><label>PIC</label><input id="contentPic" placeholder="Person in charge"></div><div class="field"><label>Status</label><select id="contentStatus"><option value="draft">Draft</option><option value="planned">Planned</option><option value="script-making">Script Making</option><option value="recording">Recording</option><option value="editing">Editing</option><option value="revisions">Revisions</option><option value="on-review">On Review</option><option value="approved">Approved</option><option value="posted">Posted</option><option value="not-approved">Not Approved</option><option value="reschedule">Reschedule</option></select></div><div class="field full"><label>Reference URL</label><input id="contentReference" type="url" placeholder="https://"></div>
@@ -606,8 +606,11 @@ showView('calendar');
     }
     content.forEach(item => {
       const row = document.createElement('tr');
-      row.innerHTML = `<td><div class="contentname">${escapeHtml(item.content_name)}</div><div class="sub">${escapeHtml(item.category || '')} · ${escapeHtml(item.content_format || '')}</div></td><td>${formatDate(item.publish_date)}</td><td>${formatDate(item.deadline)}</td><td>${escapeHtml(item.platform || '—')}</td><td>${escapeHtml(item.pic || 'Unassigned')}</td><td><span class="badge ${badgeClass(item.status)}">${escapeHtml(statusLabel(item.status))}</span></td><td><button class="remove-content" type="button">Remove</button></td>`;
+      row.innerHTML = `<td><div class="contentname">${escapeHtml(item.content_name)}</div><div class="sub">${escapeHtml(item.category || '')} · ${escapeHtml(item.content_format || '')}</div></td><td>${formatDate(item.publish_date)}</td><td>${formatDate(item.deadline)}</td><td>${escapeHtml(item.platform || '—')}</td><td>${escapeHtml(item.pic || 'Unassigned')}</td><td><select class="status-control" aria-label="Status for ${escapeHtml(item.content_name)}">${statusOptions.map(([value, label]) => `<option value="${value}" ${value === (item.status || 'draft') ? 'selected' : ''}>${escapeHtml(label)}</option>`).join('')}</select></td><td><button class="remove-content" type="button">Remove</button></td>`;
       row.addEventListener('click', () => Hub.openDetail(item.id));
+      const status = row.querySelector('.status-control');
+      status.addEventListener('click', event => event.stopPropagation());
+      status.addEventListener('change', event => { event.stopPropagation(); Hub.updateStatus(item.id, event.target, item.status || 'draft'); });
       row.querySelector('.remove-content').addEventListener('click', event => { event.stopPropagation(); Hub.remove(item.id); });
       planBody.append(row);
     });
@@ -674,6 +677,20 @@ showView('calendar');
     if (error) { setConnectionNotice('Supabase content could not be loaded. Check the content table RLS policies.'); console.error(error); return; }
     content = data || []; setConnectionNotice(''); Hub.renderAll();
   };
+  Hub.updateStatus = async (id, select, previousStatus) => {
+    const status = select.value;
+    select.disabled = true;
+    const { error } = await supabaseClient.from('content').update({ status, updated_at: new Date().toISOString() }).eq('id', id);
+    if (error) {
+      select.value = previousStatus;
+      select.disabled = false;
+      alert(`Could not update status: ${error.message}`);
+      return;
+    }
+    const item = content.find(entry => entry.id === id);
+    if (item) item.status = status;
+    Hub.renderAll();
+  };
 
   function openModal(html) {
     Hub.closeModal();
@@ -703,6 +720,60 @@ showView('calendar');
     if (result.error) { alert(`Could not save content: ${result.error.message}`); return; }
     await Hub.load(); Hub.openDetail(result.data.id);
   };
+  Hub.insights = [];
+  Hub.renderInsights = () => {
+    const body = document.getElementById('insightsHistory');
+    if (!body) return;
+    body.textContent = '';
+    if (!Hub.insights.length) {
+      body.innerHTML = '<tr><td colspan="9" class="emptymsg">No insight history yet. Add a performance entry for existing content.</td></tr>';
+      return;
+    }
+    Hub.insights.forEach(entry => {
+      const row = document.createElement('tr');
+      const item = content.find(candidate => candidate.id === entry.content_id);
+      row.innerHTML = `<td>${escapeHtml(item?.content_name || 'Content unavailable')}</td><td>${formatDate(String(entry.created_at || '').slice(0, 10))}</td><td>${entry.reach ?? '—'}</td><td>${entry.likes ?? '—'}</td><td>${entry.comments ?? '—'}</td><td>${entry.shares ?? '—'}</td><td>${entry.saves ?? '—'}</td><td>${entry.engagement_rate ?? '—'}</td><td>${escapeHtml(entry.notes || '—')}</td>`;
+      body.append(row);
+    });
+  };
+  Hub.loadInsights = async () => {
+    const body = document.getElementById('insightsHistory');
+    if (!body) return;
+    body.innerHTML = '<tr><td colspan="9" class="emptymsg">Loading insight history…</td></tr>';
+    const { data, error } = await supabaseClient.from('content_insights')
+      .select('id,content_id,created_at,reach,likes,comments,shares,saves,engagement_rate,notes')
+      .order('created_at', { ascending: false });
+    if (error) {
+      body.innerHTML = `<tr><td colspan="9" class="emptymsg">Could not load insight history: ${escapeHtml(error.message)}</td></tr>`;
+      return;
+    }
+    Hub.insights = data || [];
+    Hub.renderInsights();
+  };
+  function insightNumberField(label, id) {
+    return `<div class="field"><label for="${id}">${label}</label><input id="${id}" type="number" min="0" step="any"></div>`;
+  }
+  Hub.openInsightForm = () => {
+    if (!content.length) { alert('Add content before recording an insight.'); return; }
+    openModal(`<button class="modalclose" type="button" aria-label="Close">×</button><div class="modalform"><form id="insightForm" class="formbox"><div class="eyebrow">Insights</div><h2>Add insight</h2><p class="formintro">Each save adds a new entry to the content history. Recorded date is set by the existing database field.</p><div class="fields"><div class="field full"><label for="insightContent">Content</label><select id="insightContent" required><option value="">Select content</option>${content.map(item => `<option value="${item.id}">${escapeHtml(item.content_name)}</option>`).join('')}</select></div>${insightNumberField('Reach', 'insightReach')}${insightNumberField('Likes', 'insightLikes')}${insightNumberField('Comments', 'insightComments')}${insightNumberField('Shares', 'insightShares')}${insightNumberField('Saves', 'insightSaves')}${insightNumberField('Engagement Rate', 'insightEngagementRate')}<div class="field full"><label for="insightNotes">Notes</label><textarea id="insightNotes"></textarea></div></div><div class="formnote" id="insightFormMessage"></div><div style="display:flex;gap:10px;margin-top:20px"><button class="primary" type="submit">Save insight</button><button class="secondary" type="button" data-cancel>Cancel</button></div></form></div>`);
+    const modal = document.querySelector('.contentmodal');
+    modal.querySelector('.modalclose').addEventListener('click', Hub.closeModal);
+    modal.querySelector('[data-cancel]').addEventListener('click', Hub.closeModal);
+    modal.querySelector('#insightForm').addEventListener('submit', Hub.saveInsight);
+  };
+  Hub.saveInsight = async event => {
+    event.preventDefault();
+    const form = event.currentTarget, message = form.querySelector('#insightFormMessage');
+    const number = id => { const value = document.getElementById(id).value; return value === '' ? null : Number(value); };
+    const record = { content_id: document.getElementById('insightContent').value, reach: number('insightReach'), likes: number('insightLikes'), comments: number('insightComments'), shares: number('insightShares'), saves: number('insightSaves'), engagement_rate: number('insightEngagementRate'), notes: document.getElementById('insightNotes').value.trim() || null };
+    if (!record.content_id) { message.textContent = 'Select content before saving.'; message.style.color = 'var(--red)'; return; }
+    const submit = form.querySelector('[type="submit"]'); submit.disabled = true; message.textContent = 'Saving…'; message.style.color = 'var(--muted)';
+    const { error } = await supabaseClient.from('content_insights').insert(record);
+    if (error) { submit.disabled = false; message.textContent = `Could not save insight: ${error.message}`; message.style.color = 'var(--red)'; return; }
+    message.textContent = 'Insight saved.'; message.style.color = 'var(--green)';
+    await Hub.loadInsights();
+    setTimeout(Hub.closeModal, 700);
+  };
   Hub.remove = async id => { if (!confirm('Remove this content from the Content Plan?')) return; const { error } = await supabaseClient.from('content').delete().eq('id', id); if (error) return alert(`Could not remove content: ${error.message}`); await Hub.load(); };
 
   const controls = document.getElementById('calendarControls');
@@ -713,7 +784,8 @@ showView('calendar');
   document.querySelectorAll('[data-calendar-view]').forEach(button => button.addEventListener('click', () => { Hub.calendarView = button.dataset.calendarView; document.querySelectorAll('[data-calendar-view]').forEach(x => x.classList.toggle('active', x === button)); Hub.renderCalendar(); }));
   document.addEventListener('keydown', event => { if (event.key === 'Escape' && document.getElementById('contentModalBackdrop')) Hub.closeModal(); });
   window.openContentForm = () => Hub.openForm(null);
-  document.querySelectorAll('.nav button').forEach(button => button.addEventListener('click', () => { if (button.dataset.view === 'insights') document.getElementById('pageTitle').textContent = 'Insights'; }));
+  document.getElementById('addInsight').addEventListener('click', Hub.openInsightForm);
+  document.querySelectorAll('.nav button').forEach(button => button.addEventListener('click', () => { if (button.dataset.view === 'insights') { document.getElementById('pageTitle').textContent = 'Insights'; Hub.loadInsights(); } }));
   Hub.load();
 })();
 </script>
