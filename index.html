@@ -702,14 +702,14 @@ showView('calendar');
   };
 
   function openModal(html) {
-    Hub.closeModal();
+    Hub.closeModal(false);
     Hub.restoreOverflow = document.body.style.overflow; document.body.style.overflow = 'hidden';
     const backdrop = document.createElement('div'); backdrop.className = 'modalbackdrop'; backdrop.id = 'contentModalBackdrop';
     backdrop.innerHTML = `<div class="contentmodal" role="dialog" aria-modal="true">${html}</div>`;
     backdrop.addEventListener('click', event => { if (event.target === backdrop) Hub.closeModal(); });
     document.body.append(backdrop); backdrop.querySelector('.modalclose')?.focus();
   }
-  Hub.closeModal = () => { document.getElementById('contentModalBackdrop')?.remove(); document.body.style.overflow = Hub.restoreOverflow || ''; Hub.activeModalId = null; };
+  Hub.closeModal = (clearActiveId = true) => { document.getElementById('contentModalBackdrop')?.remove(); document.body.style.overflow = Hub.restoreOverflow || ''; if (clearActiveId) Hub.activeModalId = null; };
   Hub.openDetail = id => {
     const item = content.find(entry => entry.id === id); if (!item) return; Hub.activeModalId = id;
     openModal(`<button class="modalclose" type="button" aria-label="Close">×</button><article class="detailcard"><div class="detailhero"><div><div class="eyebrow">Content detail</div><h2>${escapeHtml(item.content_name)}</h2><span class="badge ${badgeClass(item.status)}">${escapeHtml(statusLabel(item.status))}</span></div><button class="secondary" type="button" data-edit> Edit content </button></div><div class="detailgrid"><div><label>Category</label><p>${escapeHtml(item.category || '—')}</p></div><div><label>Objective</label><p>${escapeHtml(item.objective || '—')}</p></div><div><label>Platform</label><p>${escapeHtml(item.platform || '—')}</p></div><div><label>Content format</label><p>${escapeHtml(item.content_format || '—')}</p></div><div><label>Ratio</label><p>${escapeHtml(item.ratio || '—')}</p></div><div><label>PIC</label><p>${escapeHtml(item.pic || 'Unassigned')}</p></div><div><label>Published date</label><p>${formatDate(item.publish_date)}</p></div><div><label>Deadline</label><p>${formatDate(item.deadline)}</p></div><div><label>Reference</label><p>${item.reference_url ? `<a href="${escapeHtml(item.reference_url)}" target="_blank" rel="noopener">Open ↗</a>` : '—'}</p></div><div class="desc"><label>Script / Writing</label><p>${escapeHtml(item.script || '—')}</p></div><div class="desc"><label>Caption</label><p>${escapeHtml(item.caption || '—')}</p></div><div class="desc"><label>Materials</label><p>${item.materials_url ? `<a href="${escapeHtml(item.materials_url)}" target="_blank" rel="noopener">Open materials ↗</a>` : '—'}</p></div></div></article>`);
