@@ -10,3 +10,11 @@ test('dashboard contains one database-backed admin settings flow', () => {
   assert.match(dashboard, /rpc\('add_hub_admin'/);
   assert.doesNotMatch(dashboard, /superadmin/i);
 });
+
+test('dashboard exposes Google SSO as the only sign-in method', () => {
+  assert.match(dashboard, /id="googleLoginButton"/);
+  assert.match(dashboard, /signInWithOAuth\(\{\s*provider: 'google'/);
+  assert.doesNotMatch(dashboard, /or use email and password/i);
+  assert.doesNotMatch(dashboard, /id="loginForm"/);
+  assert.doesNotMatch(dashboard, /signInWithPassword/);
+});
