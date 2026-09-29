@@ -34,5 +34,11 @@ test('content detail navigation uses stable deep-link URLs', () => {
 
 test('content detail includes a copy-link action', () => {
   assert.match(dashboard, /data-copy-content-link/);
-  assert.match(dashboard, /navigator\.clipboard\.writeText\(window\.location\.href\)/);
+  assert.match(dashboard, /function copyCurrentContentLink\(\)/);
+  assert.match(dashboard, /document\.execCommand\('copy'\)/);
+});
+
+test('closing a content modal from the backdrop resets the deep-link URL', () => {
+  assert.match(dashboard, /backdrop\.addEventListener\('click', event => \{ if \(event\.target === backdrop\) closeContentModal\(\); \}\)/);
+  assert.match(dashboard, /function closeContentModal\(\)/);
 });
