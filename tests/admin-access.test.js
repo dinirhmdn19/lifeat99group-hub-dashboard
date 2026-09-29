@@ -25,3 +25,14 @@ test('add content opens the same modal form flow as edit content', () => {
   assert.match(dashboard, /Hub\.openForm\s*=\s*id\s*=>/);
   assert.match(dashboard, /openModal\(`<button class="modalclose"/);
 });
+
+test('content detail navigation uses stable deep-link URLs', () => {
+  assert.match(dashboard, /function contentUrl\(id\)/);
+  assert.match(dashboard, /history\.pushState\(\{\}, '', contentUrl\(id\)\)/);
+  assert.match(dashboard, /window\.addEventListener\('popstate'/);
+});
+
+test('content detail includes a copy-link action', () => {
+  assert.match(dashboard, /data-copy-content-link/);
+  assert.match(dashboard, /navigator\.clipboard\.writeText\(window\.location\.href\)/);
+});
