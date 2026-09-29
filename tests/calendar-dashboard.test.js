@@ -15,3 +15,7 @@ test('calendar guest setting is represented in the Supabase migration', () => {
   const migration = fs.readFileSync(path.join(__dirname, '..', 'supabase/migrations/20260929_calendar_guests.sql'), 'utf8');
   assert.match(migration, /calendar_guest boolean not null default false/);
 });
+
+test('calendar retry keeps a button reference across the async request', () => {
+  assert.match(dashboard, /const retryButton = event\.currentTarget;[\s\S]*?await syncCalendar\('upsert', id\)[\s\S]*?retryButton\.disabled/);
+});

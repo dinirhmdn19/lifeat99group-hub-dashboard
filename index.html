@@ -881,11 +881,12 @@ renderStatusLegend();
       }
     });
     modal.querySelector('[data-calendar-retry]').addEventListener('click', async event => {
-      event.currentTarget.disabled = true;
-      event.currentTarget.textContent = 'Syncing…';
+      const retryButton = event.currentTarget;
+      retryButton.disabled = true;
+      retryButton.textContent = 'Syncing…';
       const result = await syncCalendar('upsert', id);
-      event.currentTarget.disabled = false;
-      event.currentTarget.textContent = result.ok ? 'Synced' : 'Retry failed';
+      retryButton.disabled = false;
+      retryButton.textContent = result.ok ? 'Synced' : 'Retry failed';
       if (!result.ok) showCalendarError(result.error);
       else await Hub.load();
     });
