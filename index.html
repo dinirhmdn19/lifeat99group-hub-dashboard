@@ -126,7 +126,7 @@
 /*
  Lifeat99Group Hub — Phase 1
  Focus: Content Plan + Calendar + Settings.
- SSO is required for access. Employee submissions, email notifications and Google Calendar remain disabled.
+ SSO is required for access. Calendar synchronization is handled by the server-side Vercel endpoint.
 */
 
 // Supabase client configuration.
@@ -796,6 +796,20 @@ renderStatusLegend();
     if (item) item.status = status;
     Hub.renderAll();
   };
+  async function syncCalendar(operation, contentId) {
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    if (!session?.access_token) return { ok: false, error: 'No active session' };
+    const response = await fetch('/api/calendar', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${session.access_token}` },
+      body: JSON.stringify({ operation, contentId })
+    });
+    const data = await response.json().catch(() => ({}));
+    return response.ok ? { ok: true, data } : { ok: false, error: data.error || `Calendar request failed (${response.status})` };
+  }
+  function showCalendarError(message) {
+    setConnectionNotice(`Content saved, but Google Calendar sync failed: ${message}. You can retry from the content detail.`);
+  }
   Hub.reschedule = async (id, newDate) => {
     const item = content.find(entry => entry.id === id);
     if (!item || !newDate || item.publish_date === newDate) return;
@@ -811,6 +825,9 @@ renderStatusLegend();
       Hub.renderAll();
       setConnectionNotice(`Could not reschedule content: ${error.message}`);
       alert(`Could not reschedule content: ${error.message}`);
+    } else {
+      const calendarResult = await syncCalendar('upsert', id);
+      if (!calendarResult.ok) showCalendarError(calendarResult.error);
     }
   };
 
@@ -850,7 +867,7 @@ renderStatusLegend();
     if (updateUrl && window.location.pathname !== contentUrl(id)) {
       history.pushState({}, '', contentUrl(id));
     }
-    openModal(`<button class="modalclose" type="button" aria-label="Close">×</button><article class="detailcard"><div class="detailhero"><div><div class="eyebrow">Content detail</div><h2>${escapeHtml(item.content_name)}</h2><span class="badge ${badgeClass(item.status)}">${escapeHtml(statusLabel(item.status))}</span></div><div style="display:flex;gap:8px"><button class="secondary" type="button" data-copy-content-link>Copy link</button><button class="secondary" type="button" data-edit>Edit content</button></div></div><div class="detailgrid"><div><label>Category</label><p>${escapeHtml(item.category || '—')}</p></div><div><label>Objective</label><p>${escapeHtml(item.objective || '—')}</p></div><div><label>Platform</label><p>${escapeHtml(item.platform || '—')}</p></div><div><label>Content format</label><p>${escapeHtml(item.content_format || '—')}</p></div><div><label>Ratio</label><p>${escapeHtml(item.ratio || '—')}</p></div><div><label>PIC</label><p>${escapeHtml(item.pic || 'Unassigned')}</p></div><div><label>Published date</label><p>${formatDate(item.publish_date)}</p></div><div><label>Deadline</label><p>${formatDate(item.deadline)}</p></div><div><label>Reference</label><p>${item.reference_url ? `<a href="${escapeHtml(item.reference_url)}" target="_blank" rel="noopener">Open ↗</a>` : '—'}</p></div><div class="desc"><label>Script / Writing</label><p>${escapeHtml(item.script || '—')}</p></div><div class="desc"><label>Caption</label><p>${escapeHtml(item.caption || '—')}</p></div><div class="desc"><label>Materials</label><p>${item.materials_url ? `<a href="${escapeHtml(item.materials_url)}" target="_blank" rel="noopener">Open materials ↗</a>` : '—'}</p></div></div></article>`);
+    openModal(`<button class="modalclose" type="button" aria-label="Close">×</button><article class="detailcard"><div class="detailhero"><div><div class="eyebrow">Content detail</div><h2>${escapeHtml(item.content_name)}</h2><span class="badge ${badgeClass(item.status)}">${escapeHtml(statusLabel(item.status))}</span></div><div style="display:flex;gap:8px"><button class="secondary" type="button" data-copy-content-link>Copy link</button><button class="secondary" type="button" data-edit>Edit content</button><button class="secondary" type="button" data-calendar-retry>Sync Calendar</button></div></div><div class="detailgrid"><div><label>Category</label><p>${escapeHtml(item.category || '—')}</p></div><div><label>Objective</label><p>${escapeHtml(item.objective || '—')}</p></div><div><label>Platform</label><p>${escapeHtml(item.platform || '—')}</p></div><div><label>Content format</label><p>${escapeHtml(item.content_format || '—')}</p></div><div><label>Ratio</label><p>${escapeHtml(item.ratio || '—')}</p></div><div><label>PIC</label><p>${escapeHtml(item.pic || 'Unassigned')}</p></div><div><label>Published date</label><p>${formatDate(item.publish_date)}</p></div><div><label>Deadline</label><p>${formatDate(item.deadline)}</p></div><div><label>Reference</label><p>${item.reference_url ? `<a href="${escapeHtml(item.reference_url)}" target="_blank" rel="noopener">Open ↗</a>` : '—'}</p></div><div class="desc"><label>Script / Writing</label><p>${escapeHtml(item.script || '—')}</p></div><div class="desc"><label>Caption</label><p>${escapeHtml(item.caption || '—')}</p></div><div class="desc"><label>Materials</label><p>${item.materials_url ? `<a href="${escapeHtml(item.materials_url)}" target="_blank" rel="noopener">Open materials ↗</a>` : '—'}</p></div></div></article>`);
     const modal = document.querySelector('.contentmodal');
     modal.querySelector('.modalclose').addEventListener('click', closeContentModal);
     modal.querySelector('[data-edit]').addEventListener('click', () => Hub.openForm(id));
@@ -862,6 +879,15 @@ renderStatusLegend();
       } catch (error) {
         alert('Could not copy the content link. Please copy the URL from your browser.');
       }
+    });
+    modal.querySelector('[data-calendar-retry]').addEventListener('click', async event => {
+      event.currentTarget.disabled = true;
+      event.currentTarget.textContent = 'Syncing…';
+      const result = await syncCalendar('upsert', id);
+      event.currentTarget.disabled = false;
+      event.currentTarget.textContent = result.ok ? 'Synced' : 'Retry failed';
+      if (!result.ok) showCalendarError(result.error);
+      else await Hub.load();
     });
   };
   function field(label, id, value, type = 'text', extra = '') { return `<div class="field${extra ? ' ' + extra : ''}"><label for="${id}">${label}</label>${type === 'textarea' ? `<textarea id="${id}">${escapeHtml(value || '')}</textarea>` : `<input id="${id}" type="${type}" value="${escapeHtml(value || '')}">`}</div>`; }
@@ -876,6 +902,8 @@ renderStatusLegend();
     if (!record.content_name) return; const id = Hub.activeModalId;
     const result = id ? await supabaseClient.from('content').update(record).eq('id', id).select().single() : await supabaseClient.from('content').insert(record).select().single();
     if (result.error) { alert(`Could not save content: ${result.error.message}`); return; }
+    const calendarResult = await syncCalendar('upsert', result.data.id);
+    if (!calendarResult.ok) showCalendarError(calendarResult.error);
     Hub.upsertContent(result.data);
     Hub.openDetail(result.data.id);
   };
@@ -950,7 +978,7 @@ renderStatusLegend();
     await Hub.loadInsights();
     setTimeout(Hub.closeModal, 700);
   };
-  Hub.remove = async id => { if (!confirm('Remove this content from the Content Plan?')) return; const { error } = await supabaseClient.from('content').delete().eq('id', id); if (error) return alert(`Could not remove content: ${error.message}`); await Hub.load(); };
+  Hub.remove = async id => { if (!confirm('Remove this content from the Content Plan?')) return; const calendarResult = await syncCalendar('delete', id); if (!calendarResult.ok) console.error(calendarResult.error); const { error } = await supabaseClient.from('content').delete().eq('id', id); if (error) return alert(`Could not remove content: ${error.message}`); await Hub.load(); };
 
   const controls = document.getElementById('calendarControls');
   controls.innerHTML = '<button class="secondary" type="button" data-prev>‹</button><button class="secondary today" type="button" data-today>TODAY</button><button class="secondary" type="button" data-next>›</button>';
