@@ -13,7 +13,7 @@ create table if not exists public.app_users (
   email text not null unique,
   name text,
   role text not null default 'viewer' check (role in ('admin', 'editor', 'viewer')),
-  active boolean not null default true,
+  is_active boolean not null default true,
   permissions jsonb not null default '{}'::jsonb,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()

@@ -1005,9 +1005,9 @@ renderStatusLegend();
 
     const { data: appUser, error: appUserError } = await supabaseClient
       .from('app_users')
-      .select('id, auth_user_id, email, name, role, active')
+      .select('id, auth_user_id, email, name, role, is_active')
       .eq('auth_user_id', session.user.id)
-      .eq('active', true)
+      .eq('is_active', true)
       .maybeSingle();
 
     if (appUserError || !appUser) {
