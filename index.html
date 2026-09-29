@@ -914,6 +914,11 @@ renderStatusLegend();
   controls.querySelector('[data-today]').addEventListener('click', () => { currentMonth = new Date(); Hub.renderCalendar(); });
   document.querySelectorAll('[data-calendar-view]').forEach(button => button.addEventListener('click', () => { Hub.calendarView = button.dataset.calendarView; document.querySelectorAll('[data-calendar-view]').forEach(x => x.classList.toggle('active', x === button)); Hub.renderCalendar(); }));
   document.addEventListener('keydown', event => { if (event.key === 'Escape' && document.getElementById('contentModalBackdrop')) Hub.closeModal(); });
+  document.querySelectorAll('[onclick="openContentForm()"]')
+    .forEach(button => {
+      button.removeAttribute('onclick');
+      button.addEventListener('click', () => Hub.openForm(null));
+    });
   window.openContentForm = () => Hub.openForm(null);
   document.getElementById('addInsight').addEventListener('click', Hub.openInsightForm);
   document.querySelectorAll('.nav button').forEach(button => button.addEventListener('click', () => { if (button.dataset.view === 'insights') { document.getElementById('pageTitle').textContent = 'Insights'; Hub.loadInsights(); } }));

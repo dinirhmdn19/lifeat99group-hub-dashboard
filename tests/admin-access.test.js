@@ -18,3 +18,10 @@ test('dashboard exposes Google SSO as the only sign-in method', () => {
   assert.doesNotMatch(dashboard, /id="loginForm"/);
   assert.doesNotMatch(dashboard, /signInWithPassword/);
 });
+
+test('add content opens the same modal form flow as edit content', () => {
+  assert.match(dashboard, /querySelectorAll\('\[onclick="openContentForm\(\)"\]'\)/);
+  assert.match(dashboard, /addEventListener\('click', \(\) => Hub\.openForm\(null\)\)/);
+  assert.match(dashboard, /Hub\.openForm\s*=\s*id\s*=>/);
+  assert.match(dashboard, /openModal\(`<button class="modalclose"/);
+});
