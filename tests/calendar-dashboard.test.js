@@ -36,3 +36,8 @@ test('calendar service uses the production dashboard base URL for content links'
   assert.match(service, /lifeat99group-hub-dashboard\.vercel\.app/);
   assert.match(service, /<a href=/);
 });
+
+test('Vercel rewrites content deep links to the dashboard shell', () => {
+  const vercel = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'vercel.json'), 'utf8'));
+  assert.deepEqual(vercel.rewrites, [{ source: '/content/:id*', destination: '/' }]);
+});
