@@ -24,3 +24,9 @@ test('calendar API checks for a missing Google event response before reading its
   const api = fs.readFileSync(path.join(__dirname, '..', 'api/calendar.js'), 'utf8');
   assert.match(api, /if \(!created\|\| !created\.id\)/);
 });
+
+test('calendar service preserves Google 404 details for create requests', () => {
+  const service = fs.readFileSync(path.join(__dirname, '..', 'lib/calendar-service.js'), 'utf8');
+  assert.match(service, /allowNotFound = false/);
+  assert.match(service, /Google Calendar request failed \(404\)/);
+});

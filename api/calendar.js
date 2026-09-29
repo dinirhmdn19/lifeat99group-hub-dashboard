@@ -50,7 +50,7 @@ module.exports = async (req, res) => {
       // changes update the event, while calendar_guest changes affect future events only.
       const updateEvent = { ...event };
       delete updateEvent.attendees;
-      const updated = await calendarRequest('PATCH', content.google_calendar_event_id, updateEvent);
+      const updated = await calendarRequest('PATCH', content.google_calendar_event_id, updateEvent, true);
       if (!updated) {
         const created = await calendarRequest('POST', null, event);
         if (!created || !created.id) throw new Error('Google Calendar did not return a created event. Verify GOOGLE_CALENDAR_ID and that the organizer account has access to this calendar.');
