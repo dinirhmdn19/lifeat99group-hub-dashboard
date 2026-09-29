@@ -67,6 +67,7 @@ In the Vercel project, open **Settings → Environment Variables** and add these
 | `GOOGLE_CLIENT_SECRET` | Google OAuth Web application Client secret | Secret |
 | `GOOGLE_REFRESH_TOKEN` | Refresh token generated for the designated organizer account | Secret |
 | `GOOGLE_CALENDAR_ID` | `c_e4e58d37c0e3d12c795affcbe014a0974fafc5507f64ab2a2879493a0ef05f4f@group.calendar.google.com` | Configuration value |
+| `APP_BASE_URL` | `https://lifeat99group-hub-dashboard.vercel.app` | Configuration value |
 
 After adding or changing environment variables, deploy again. Vercel applies environment-variable changes to new deployments, not previous deployments.
 

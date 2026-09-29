@@ -7,7 +7,7 @@ test('buildEvent creates a one-hour Jakarta event with a stable dashboard link',
   const event = buildEvent({ id: 'abc', content_name: 'Employee Spotlight: Nia', publish_date: '2026-10-05' }, ['admin@example.com']);
   assert.deepEqual(event, {
     summary: 'Employee Spotlight: Nia',
-    description: 'Life@99 Group Hub content: /content/abc',
+    description: 'Life@99 Group Hub content: <a href="https://lifeat99group-hub-dashboard.vercel.app/content/abc">Open content in Life@99 Group Hub</a>',
     start: { dateTime: '2026-10-05T19:00:00+07:00', timeZone: 'Asia/Jakarta' },
     end: { dateTime: '2026-10-05T20:00:00+07:00', timeZone: 'Asia/Jakarta' },
     attendees: [{ email: 'admin@example.com' }]

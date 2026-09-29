@@ -30,3 +30,9 @@ test('calendar service preserves Google 404 details for create requests', () => 
   assert.match(service, /allowNotFound = false/);
   assert.match(service, /Google Calendar request failed \(404\)/);
 });
+
+test('calendar service uses the production dashboard base URL for content links', () => {
+  const service = fs.readFileSync(path.join(__dirname, '..', 'lib/calendar-service.js'), 'utf8');
+  assert.match(service, /lifeat99group-hub-dashboard\.vercel\.app/);
+  assert.match(service, /<a href=/);
+});
