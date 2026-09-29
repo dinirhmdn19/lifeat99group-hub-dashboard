@@ -19,3 +19,8 @@ test('calendar guest setting is represented in the Supabase migration', () => {
 test('calendar retry keeps a button reference across the async request', () => {
   assert.match(dashboard, /const retryButton = event\.currentTarget;[\s\S]*?await syncCalendar\('upsert', id\)[\s\S]*?retryButton\.disabled/);
 });
+
+test('calendar API checks for a missing Google event response before reading its id', () => {
+  const api = fs.readFileSync(path.join(__dirname, '..', 'api/calendar.js'), 'utf8');
+  assert.match(api, /if \(!created\|\| !created\.id\)/);
+});

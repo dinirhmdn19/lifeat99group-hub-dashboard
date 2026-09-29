@@ -53,12 +53,14 @@ module.exports = async (req, res) => {
       const updated = await calendarRequest('PATCH', content.google_calendar_event_id, updateEvent);
       if (!updated) {
         const created = await calendarRequest('POST', null, event);
+        if (!created || !created.id) throw new Error('Google Calendar did not return a created event. Verify GOOGLE_CALENDAR_ID and that the organizer account has access to this calendar.');
         await supabaseRequest(`/rest/v1/content?id=eq.${encodeURIComponent(contentId)}`, { method: 'PATCH', headers: { prefer: 'return=minimal' }, body: JSON.stringify({ google_calendar_event_id: created.id, updated_at: new Date().toISOString() }) });
         return json(res, 200, { eventId: created.id, recreated: true });
       }
       return json(res, 200, { eventId: updated.id, updated: true });
     }
     const created = await calendarRequest('POST', null, event);
+    if (!created || !created.id) throw new Error('Google Calendar did not return a created event. Verify GOOGLE_CALENDAR_ID and that the organizer account has access to this calendar.');
     await supabaseRequest(`/rest/v1/content?id=eq.${encodeURIComponent(contentId)}`, { method: 'PATCH', headers: { prefer: 'return=minimal' }, body: JSON.stringify({ google_calendar_event_id: created.id, updated_at: new Date().toISOString() }) });
     return json(res, 200, { eventId: created.id, created: true });
   } catch (error) {
