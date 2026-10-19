@@ -20,7 +20,7 @@
 <section class="authgate" id="authGate" aria-live="polite"><div class="authcard"><div class="eyebrow">LifeAt99Group Hub</div><h1>Welcome to Lifeat99group Hub</h1><p class="formintro">Sign in to continue to the dashboard.</p><button class="google-button" id="googleLoginButton" type="button"><span class="google-icon" aria-hidden="true">G</span>Sign in with Google SSO</button><div class="autherror" id="authError" role="alert"></div></div></section>
 <div class="app">
   <aside class="sidebar"><div class="brand"><span class="mark">99</span> Lifeat99Group Hub</div><div class="navlabel">WORKSPACE</div><nav class="nav">
-    <button class="active" data-view="calendar">📅&nbsp; Calendar</button><button data-view="plan">📝&nbsp; Content Plan <span class="n" id="contentTotal">0</span></button><button data-view="insights">📈&nbsp; Insights</button><button data-view="settings">⚙️&nbsp; Settings</button>
+    <button class="active" data-view="calendar">📅&nbsp; Calendar</button><button data-view="plan">📝&nbsp; Content List</button><button data-view="insights">📈&nbsp; Insights</button><button data-view="settings">⚙️&nbsp; Settings</button>
   </nav><div class="sidefoot">People Team · 99 Group</div></aside>
   <main class="main">
     <header class="topbar"><div><div class="eyebrow">Employer Branding</div><h1 class="title" id="pageTitle">Content Calendar</h1></div><div class="profile"><span>People Team</span><span class="avatar">PT</span><button class="secondary" type="button" id="signOutTopButton">Sign out</button></div></header>
@@ -688,7 +688,6 @@ renderStatusLegend();
     if (!planBody) return;
     renderPlanFilters();
     planBody.textContent = '';
-    document.getElementById('contentTotal').textContent = content.length;
     const filtered = ContentPlan.filterContent(content, planState.filters);
     const sorted = ContentPlan.sortContent(filtered, planState.sortKey, planState.sortDirection);
     document.getElementById('planTotalLabel').textContent = `${content.length} total content`;
