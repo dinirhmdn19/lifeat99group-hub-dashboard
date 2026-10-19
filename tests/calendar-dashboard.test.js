@@ -17,6 +17,13 @@ test('calendar summary omits green helper text and the total content card', () =
   assert.doesNotMatch(calendar, /Total content/);
 });
 
+test('calendar summary includes an auto-updating next-to-post card', () => {
+  const calendar = dashboard.match(/<section class="view active" id="calendar">[\s\S]*?<\/section>/)?.[0] || '';
+  assert.match(calendar, /class="stat upcoming-stat"/);
+  assert.match(calendar, /Next to post/);
+  assert.match(dashboard, /publish_date && item\.publish_date >= todayKey\(\) && item\.status !== 'posted'/);
+});
+
 test('calendar guest setting is represented in the Supabase migration', () => {
   const migration = fs.readFileSync(path.join(__dirname, '..', 'supabase/migrations/20260929_calendar_guests.sql'), 'utf8');
   assert.match(migration, /calendar_guest boolean not null default false/);
