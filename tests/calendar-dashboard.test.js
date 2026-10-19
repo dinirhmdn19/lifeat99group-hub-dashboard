@@ -11,6 +11,12 @@ test('dashboard contains Calendar integration hooks without browser secrets', ()
   assert.doesNotMatch(dashboard, /GOOGLE_REFRESH_TOKEN/);
 });
 
+test('calendar summary omits green helper text and the total content card', () => {
+  const calendar = dashboard.match(/<section class="view active" id="calendar">[\s\S]*?<\/section>/)?.[0] || '';
+  assert.doesNotMatch(calendar, /class="delta"/);
+  assert.doesNotMatch(calendar, /Total content/);
+});
+
 test('calendar guest setting is represented in the Supabase migration', () => {
   const migration = fs.readFileSync(path.join(__dirname, '..', 'supabase/migrations/20260929_calendar_guests.sql'), 'utf8');
   assert.match(migration, /calendar_guest boolean not null default false/);
