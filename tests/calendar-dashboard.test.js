@@ -20,6 +20,12 @@ test('calendar retry keeps a button reference across the async request', () => {
   assert.match(dashboard, /const retryButton = event\.currentTarget;[\s\S]*?await syncCalendar\('upsert', id\)[\s\S]*?retryButton\.disabled/);
 });
 
+test('content detail card exposes a lower-right trash button wired to removal', () => {
+  assert.match(dashboard, /data-remove-content/);
+  assert.match(dashboard, /setAttribute\('aria-label', 'Remove content'\)/);
+  assert.match(dashboard, /data-remove-content[\s\S]*?Hub\.remove\(id\)/);
+});
+
 test('calendar API checks for a missing Google event response before reading its id', () => {
   const api = fs.readFileSync(path.join(__dirname, '..', 'api/calendar.js'), 'utf8');
   assert.match(api, /if \(!created\|\| !created\.id\)/);
