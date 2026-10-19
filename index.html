@@ -133,7 +133,7 @@
   <script>
 /*
  Lifeat99Group Hub — Phase 1
- Focus: Content Plan + Calendar + Settings.
+  Focus: Content List + Calendar + Settings.
  SSO is required for access. Calendar synchronization is handled by the server-side Vercel endpoint.
 */
 
@@ -149,11 +149,11 @@ const supabaseClient = window.supabase.createClient(
 
 const titles = {
   calendar: 'Content Calendar',
-  plan: 'Content Plan',
+  plan: 'Content List',
   insights: 'Insights',
   settings: 'Settings',
   contentDetail: 'Content details',
-  contentForm: 'Content Plan'
+  contentForm: 'Content List'
 };
 
 function contentUrl(id) {
@@ -355,7 +355,7 @@ async function updateStatus(id, status) {
 }
 
 async function removeContent(id) {
-  if (!confirm('Remove this content from the Content Plan?')) return;
+  if (!confirm('Remove this content from the Content List?')) return;
 
   if (supabaseClient) {
     const {error} = await supabaseClient.from('content').delete().eq('id', id);
@@ -1032,7 +1032,7 @@ renderStatusLegend();
     await Hub.loadInsights();
     setTimeout(Hub.closeModal, 700);
   };
-  Hub.remove = async id => { if (!confirm('Remove this content from the Content Plan?')) return; const calendarResult = await syncCalendar('delete', id); if (!calendarResult.ok) console.error(calendarResult.error); const { error } = await supabaseClient.from('content').delete().eq('id', id); if (error) return alert(`Could not remove content: ${error.message}`); Hub.closeModal(); if (contentIdFromUrl()) history.pushState({}, '', '/'); await Hub.load(); };
+  Hub.remove = async id => { if (!confirm('Remove this content from the Content List?')) return; const calendarResult = await syncCalendar('delete', id); if (!calendarResult.ok) console.error(calendarResult.error); const { error } = await supabaseClient.from('content').delete().eq('id', id); if (error) return alert(`Could not remove content: ${error.message}`); Hub.closeModal(); if (contentIdFromUrl()) history.pushState({}, '', '/'); await Hub.load(); };
 
   const controls = document.getElementById('calendarControls');
   controls.innerHTML = '<button class="secondary" type="button" data-prev>‹</button><button class="secondary today" type="button" data-today>TODAY</button><button class="secondary" type="button" data-next>›</button>';
@@ -1197,5 +1197,13 @@ renderStatusLegend();
   });
 
 })();
+</script>
+<script>
+  const contentListWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  const contentListTextNodes = [];
+  while (contentListWalker.nextNode()) contentListTextNodes.push(contentListWalker.currentNode);
+  contentListTextNodes.forEach(node => {
+    node.nodeValue = node.nodeValue.replace(/Content Plan/g, 'Content List').replace(/Content plan/g, 'Content list');
+  });
 </script>
 </body></html>
